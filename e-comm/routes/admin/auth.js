@@ -13,9 +13,7 @@ const {
     validatePwd
 } = require('./validator');
 
-const {check,
-    validationResult
-} = require('express-validator');
+const {validationResult} = require('express-validator');
 
 router.get('/signup', (req, res) => {
     res.send(signUpTemplate({
@@ -32,7 +30,10 @@ router.post('/signup', [requireEmail, requirePwd, requireCnfPwd], async (req, re
             errors
         }));
     }
-    const { email,pwd } = req.body;
+    const {
+        email,
+        pwd
+    } = req.body;
 
     const user = await userRepo.create({
         email,
@@ -52,10 +53,12 @@ router.get('/signin', (req, res) => {
     res.send(signInTemplate({}));
 });
 
-router.post('/signin', [validateEmail,validatePwd], async (req, res) => {
+router.post('/signin', [validateEmail, validatePwd], async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        return res.send(signInTemplate({errors}));
+        return res.send(signInTemplate({
+            errors
+        }));
     }
     const user = await userRepo.getOneBy({
         email: req.body.email

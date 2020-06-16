@@ -1,7 +1,9 @@
 const express = require('express');
-const bodyParser = require('body-parser')
-const authRouter = require('./routes/admin/auth')
-const productRouter = require('./routes/admin/products')
+const bodyParser = require('body-parser');
+const authRouter = require('./routes/admin/auth');
+const adminProductRouter = require('./routes/admin/products');
+const productRouter = require('./routes/products');
+const cartsRouter = require('./routes/carts');
 const cookieSession = require('cookie-session');
 
 const app = express();
@@ -20,7 +22,9 @@ app.use(cookieSession({
 app.use(express.static('public'));
 
 app.use(authRouter);
+app.use(adminProductRouter);
 app.use(productRouter);
+app.use(cartsRouter);
 
 //start listening to network traffic
 app.listen(3000, () => {

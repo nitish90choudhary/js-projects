@@ -1,16 +1,17 @@
 const { forEach, map } = require("./index");
 const assert = require("assert");
 
-const test = (desc, fn) => {
-  console.log("----", desc);
-  try {
-    fn();
-  } catch (err) {
-    console.log("Failed: ", err.message);
-  }
-};
+//For running with mocha commented
+// const test = (desc, fn) => {
+//   console.log("----", desc);
+//   try {
+//     fn();
+//   } catch (err) {
+//     console.log("Failed: ", err.message);
+//   }
+// };
 
-test("The forEach function", () => {
+it("The forEach function", () => {
   let sum = 0;
   forEach([1, 2, 3], (item) => {
     sum += item;
@@ -18,7 +19,7 @@ test("The forEach function", () => {
   assert.strictEqual(sum,6,"Sum is not equal to 6");
 });
 
-test("The map function", () => {
+it("The map function", () => {
   const result = map([1, 2, 3], (value) => {
     return value * 2;
   });

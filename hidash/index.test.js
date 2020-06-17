@@ -1,4 +1,5 @@
 const { forEach, map } = require("./index");
+const assert = require("assert");
 
 const test = (desc, fn) => {
   console.log("----", desc);
@@ -14,8 +15,7 @@ test("The forEach function", () => {
   forEach([1, 2, 3], (item) => {
     sum += item;
   });
-
-  if (sum !== 64) throw new Error("Sum is not equal to 6");
+  assert.strictEqual(sum,6,"Sum is not equal to 6");
 });
 
 test("The map function", () => {
@@ -23,10 +23,9 @@ test("The map function", () => {
     return value * 2;
   });
   //result = [2,4,6]
-
-  if (result[0] !== 2) throw new Error(`Expected 2 but found result[0]`);
-  if (result[1] !== 4) throw new Error(`Expected 4 but found result[1]`);
-  if (result[2] !== 6) throw new Error(`Expected 6 but found result[2]`);
+  assert.strictEqual(result[0],2,`Expected 2 but found result[0]`);
+  assert.strictEqual(result[1],4,`Expected 2 but found result[0]`);
+  assert.strictEqual(result[2],6,`Expected 2 but found result[0]`);
 });
 
 //There are three issues

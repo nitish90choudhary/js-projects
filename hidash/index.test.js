@@ -23,9 +23,10 @@ test("The map function", () => {
     return value * 2;
   });
   //result = [2,4,6]
-  assert.strictEqual(result[0],2,`Expected 2 but found result[0]`);
-  assert.strictEqual(result[1],4,`Expected 2 but found result[0]`);
-  assert.strictEqual(result[2],6,`Expected 2 but found result[0]`);
+  assert.deepStrictEqual(result,[2,4,6]);
+//   assert.strictEqual(result[0],2,`Expected 2 but found result[0]`);
+//   assert.strictEqual(result[1],4,`Expected 2 but found result[0]`);
+//   assert.strictEqual(result[2],6,`Expected 2 but found result[0]`);
 });
 
 //There are three issues

@@ -1,6 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const chalk = require("chalk");
+const render = require("./render");
 
 const excludes = ["node_modules"];
 class Runner {
@@ -29,6 +30,8 @@ class Runner {
     for (let test of this.testFiles) {
       console.log(chalk.gray(`-- ${test.shortName} --`));
 
+      //define render in global
+      global.render = render;
       //define beforeEach in global
       const beforeEaches = [];
       global.beforeEach = (fn) => {
@@ -42,18 +45,18 @@ class Runner {
       };
 
       //define it
-      global.it = (desc, testFunc) => {
+      global.it = async (desc, testFunc) => {
         //run before each
         beforeEaches.forEach((func) => func());
 
         //run test
         try {
-          testFunc();
+          await testFunc();
           console.log(chalk.green(`\t✅ ${desc}`));
         } catch (err) {
           const message = err.message.replace("/\n/g", "\n\t\t");
           console.log(chalk.red(`\t❌ ${desc}`));
-          console.log(chalk.red("\t", message));
+          console.log(chalk.red("\t", err));
         }
         //run after each
         afterEaches.forEach((func) => func());

@@ -47,7 +47,7 @@ class Runner {
       //define it
       global.it = async (desc, testFunc) => {
         //run before each
-        beforeEaches.forEach((func) => func());
+        beforeEaches.forEach(async (func) => await func());
 
         //run test
         try {
@@ -59,7 +59,7 @@ class Runner {
           console.log(chalk.red("\t", err));
         }
         //run after each
-        afterEaches.forEach((func) => func());
+        afterEaches.forEach(async (func) => await func());
       };
 
       //load each testfile and execute
